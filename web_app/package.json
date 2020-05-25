@@ -1,0 +1,43 @@
+{
+  "name": "web_app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
+    "@nivo/line": "^0.61.1",
+    "@nivo/pie": "^0.61.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
+    "capture-video-frame": "^0.1.3",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-player": "^1.15.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.0",
+    "react-webcam": "^5.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

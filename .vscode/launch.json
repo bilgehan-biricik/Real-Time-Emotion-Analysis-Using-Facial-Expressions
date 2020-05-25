@@ -1,0 +1,19 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Gunicorn",
+      "type": "python",
+      "request": "launch",
+      "program": "/home/bilgehan/anaconda3/envs/tf_gpu/bin/gunicorn",
+      "args": [
+        "--bind=127.0.0.1:5000",
+        "--reload",
+        "${fileBasenameNoExtension}:app"
+      ]
+    }
+  ]
+}

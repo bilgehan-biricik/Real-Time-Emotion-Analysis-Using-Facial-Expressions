@@ -1,0 +1,4 @@
+{
+    "python.linting.enabled": false,
+    "python.pythonPath": "/home/bilgehan/anaconda3/envs/tf_gpu/bin/python"
+}
