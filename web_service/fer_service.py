@@ -70,6 +70,14 @@ def save_session_data():
         conn.close()
         return jsonify({"error": "Session cannot saved"})
 
+@app.route("/api/get-session-results", methods=["GET"])
+def get_session_results():
+    conn = sqlite3.connect("database/fer_db.db")
+    cursor = conn.execute("SELECT * FROM SESSION_RESULTS")
+    table = [[row[0],  row[1], row[2], row[3], row[4], row[5], row[6]] for row in cursor]
+    conn.close()
+    return jsonify({"results": table})
+    
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port="5000", debug=True)
