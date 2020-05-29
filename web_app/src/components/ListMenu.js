@@ -4,11 +4,9 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  IconButton,
-  Divider,
   Link,
 } from "@material-ui/core";
-import { Dashboard, Menu, TableChart } from "@material-ui/icons";
+import { Dashboard, TableChart } from "@material-ui/icons";
 
 const ListMenu = () => {
   return (

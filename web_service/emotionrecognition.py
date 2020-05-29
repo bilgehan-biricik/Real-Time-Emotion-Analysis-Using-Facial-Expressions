@@ -71,8 +71,7 @@ class EmotionRecognition():
                     gray_face = np.expand_dims(gray_face, 0)
                     gray_face = np.expand_dims(gray_face, -1)
 
-                    emotion_prediction = self.EMOTION_CLASSIFIER.predict(gray_face)[
-                        0]
+                    emotion_prediction = self.EMOTION_CLASSIFIER.predict(gray_face)[0]
 
                     if object_id not in self.faces:
                         self.faces[object_id] = deque(maxlen=self.deque_size)
@@ -84,16 +83,17 @@ class EmotionRecognition():
                     detected_emotions_on_faces[object_id] = {"id": object_id,
                                                              "emotion": emotion}
 
-                    text = f"{emotion}"
                     y = start_y - 10 if start_y - 10 > 10 else start_y + 10
                     cv2.rectangle(self.frame, (start_x, start_y),
-                                  (end_x, end_y), self.EMOTION_COLORS[np.argmax(results)], 1)
+                                  (end_x, end_y), self.EMOTION_COLORS[np.argmax(results)], 2)
+
+                    text = f"{emotion}"
                     cv2.putText(self.frame, text, (start_x, y),
-                                cv2.FONT_HERSHEY_SIMPLEX, 0.75, self.EMOTION_COLORS[np.argmax(results)], 1)
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.75, self.EMOTION_COLORS[np.argmax(results)], 2)
 
                     text_id = f"ID {object_id}"
                     cv2.putText(self.frame, text_id, (centroid[0] - 10, centroid[1] - 10),
-                                cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
                     cv2.circle(
                         self.frame, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
 

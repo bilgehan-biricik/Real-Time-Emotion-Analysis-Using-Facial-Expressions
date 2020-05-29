@@ -33,23 +33,18 @@ const EMOTION_SCALE = {
   happy: 30,
   suprised: 20,
   neutral: 15,
-  disgust: 10,
-  sad: 5,
-  angry: 2,
-  fear: 0,
+  disgust: 13,
+  sad: 10,
+  fear: 5,
+  angry: 0,
 };
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.intervalID = 0;
-    this.sessionData = {
-      sessionStartTimestamp: null,
-      duration: 0,
-      maxDetectedFace: 0,
-      avgSatisfactionScore: 0,
-      mostDeteceEmotion: "",
-    };
+    this.sessionData = {};
+    this.mostDetectedEmotionCounter = [];
     this.state = {
       isWebcam: false,
       isButtonStart: false,
@@ -147,11 +142,50 @@ class App extends React.Component {
 
   startSession = () => {
     this.sessionData = {
-      ...this.sessionData,
-      sessionStartTimestamp: Date.now(),
+      sessionStartTimestamp: new Date().toLocaleString(),
+      duration: 0,
+      maxDetectedFace: 0,
+      avgSatisfactionScore: 0,
+      mostDetecedEmotion: null,
     };
+    this.mostDetectedEmotionCounter = [
+      { emotion: "angry", counter: 0 },
+      { emotion: "disgust", counter: 0 },
+      { emotion: "fear", counter: 0 },
+      { emotion: "happy", counter: 0 },
+      { emotion: "sad", counter: 0 },
+      { emotion: "suprised", counter: 0 },
+      { emotion: "neutral", counter: 0 },
+    ];
+
     this.setState({ startSession: true });
-    console.log("fuck");
+  };
+
+  stopSession = () => {
+    this.setState({ startSession: false });
+
+    this.sessionData = {
+      ...this.sessionData,
+      mostDetecedEmotion: this.mostDetectedEmotionCounter.find(
+        (mde) =>
+          mde.counter ===
+          Math.max.apply(
+            Math,
+            this.mostDetectedEmotionCounter.map((m) => m.counter)
+          )
+      ),
+    };
+
+    axios
+      .post("http://127.0.0.1:5000/api/save-session-data", this.sessionData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
   };
 
   detectEmotionsInFrame = async () => {
@@ -271,11 +305,20 @@ class App extends React.Component {
       }
 
       if (this.state.startSession) {
-        this.sessionData({
+        this.mostDetectedEmotionCounter.forEach((mde) => {
+          mde.counter += this.state.pieChartData.find(
+            (pcd) => pcd.id === mde.emotion
+          ).value;
+        });
+
+        this.sessionData = {
           ...this.sessionData,
           duration: this.sessionData.duration + 1,
-        });
-        console.log(this.sessionData);
+          maxDetectedFace:
+            detectedEmotions.length > this.sessionData.maxDetectedFace
+              ? detectedEmotions.length
+              : this.sessionData.maxDetectedFace,
+        };
       }
 
       if (this.state.clearGlobals) this.setState({ clearGlobals: false });
@@ -469,9 +512,14 @@ class App extends React.Component {
                         <Button
                           variant="contained"
                           color="secondary"
-                          onClick={this.startSession}
+                          onClick={() => {
+                            this.state.startSession
+                              ? this.stopSession()
+                              : this.startSession();
+                          }}
                         >
-                          Start Session
+                          {!this.state.startSession ? "Start" : "Stop and Save"}{" "}
+                          Session
                         </Button>
                       }
                     />
