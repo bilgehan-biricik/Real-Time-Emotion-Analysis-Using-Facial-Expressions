@@ -184,8 +184,6 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-
-
   };
 
   detectEmotionsInFrame = async () => {
@@ -377,7 +375,7 @@ class App extends React.Component {
             >
               <Paper elevation={3} style={{ padding: "20px" }}>
                 <Typography variant="h4" gutterBottom>
-                  {this.state.isWebcam ? "Webcam Feed" : "Video"}
+                  {this.state.isWebcam ? "Webcam" : "Video"}
                 </Typography>
                 {this.state.isWebcam ? (
                   <ReactWebcam
@@ -502,6 +500,12 @@ class App extends React.Component {
                           </MenuItem>
                           <MenuItem value={"test_videos/video.6.mp4"}>
                             Video 6
+                          </MenuItem>
+                          <MenuItem value={"test_videos/video.7.mp4"}>
+                            Video 7
+                          </MenuItem>
+                          <MenuItem value={"test_videos/video.8.mp4"}>
+                            Video 8
                           </MenuItem>
                         </Select>
                       </FormControl>

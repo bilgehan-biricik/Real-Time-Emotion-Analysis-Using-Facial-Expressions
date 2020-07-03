@@ -18,7 +18,7 @@ class EmotionRecognition():
     EMOTION_CLASSIFIER = load_model(
         "../models/trained_fer_models/mini_xception.0.65-119.hdf5")
 
-    def __init__(self, deque_size=4):
+    def __init__(self, deque_size=3):
         self.deque_size = deque_size
         self.faces = OrderedDict()
 
