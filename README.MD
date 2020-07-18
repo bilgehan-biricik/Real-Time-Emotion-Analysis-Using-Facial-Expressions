@@ -61,7 +61,7 @@ $ python train_fer2013.py
 
 ### Install NPM Dependencies
 
-To run web app you have to install the web depencies. For this go `web_app` folder and run `npm install` command.
+To run web app you have to install the dependencies. For this go `web_app` folder and run `npm install` command.
 
 ### Run Web Service and Web Application Using VSCode
 
