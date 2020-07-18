@@ -22,7 +22,7 @@ Developed FER(Facial Expression Recognition) model for emotion recognition is ca
 
 The trained model have ~65% accuracy.
 
-<img src="images/acc.png" width="500"><img src="images/loss.png" width="500">
+<img src="images/acc.png" width="400"><img src="images/loss.png" width="400">
 
 ## Get Started
 
