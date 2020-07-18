@@ -2,6 +2,8 @@
 
 In this project, developed a client-server application that try to recognize human emotions by using facial expressions.
 
+![](/images/screenshot.png)
+
 ## Requirements
 
 - Node.js
