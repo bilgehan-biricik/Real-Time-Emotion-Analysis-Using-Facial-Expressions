@@ -6,28 +6,23 @@ import axios from "axios";
 
 import NivoPieChart from "../components/NivoPieChart";
 import NivoLineChart from "../components/NivoLineChart";
-import ListMenu from "../components/ListMenu";
 
 import {
   Container,
-  AppBar,
   Paper,
   Button,
   Switch,
   Typography,
-  Toolbar,
   FormControlLabel,
   FormGroup,
-  IconButton,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Drawer,
-  Divider,
 } from "@material-ui/core";
 
-import { Menu } from "@material-ui/icons";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const EMOTION_SCALE = {
   happy: 30,
@@ -45,10 +40,10 @@ class App extends React.Component {
     this.intervalID = 0;
     this.sessionData = {};
     this.mostDetectedEmotionCounter = [];
+    this.tempDissapearedFaces = [];
     this.state = {
       isWebcam: false,
       isButtonStart: false,
-      isDrawerOpen: false,
       isProcessing: false,
       startSession: false,
       currentVideo: "test_videos/video.1.mp4",
@@ -99,8 +94,7 @@ class App extends React.Component {
           color: "hsl(255, 0%, 60%)",
         },
       ],
-      lineChartData: [],
-      tempDissapearedFaces: [],
+      lineChartData: []
     };
   }
 
@@ -128,16 +122,6 @@ class App extends React.Component {
         this.setState({ isProcessing: false });
       });
     }, 1000);
-  };
-
-  toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    this.setState({ isDrawerOpen: open });
   };
 
   startSession = () => {
@@ -218,11 +202,10 @@ class App extends React.Component {
       });
 
       let lineChartData = JSON.parse(JSON.stringify(this.state.lineChartData));
-      let tempDissapearedFaces = [...this.state.tempDissapearedFaces];
       let xPoint = this.state.xPoint;
       if (this.state.clearGlobals) {
         lineChartData = [];
-        tempDissapearedFaces = [];
+        this.tempDissapearedFaces = [];
         xPoint = 0;
       }
 
@@ -237,12 +220,12 @@ class App extends React.Component {
         });
       }
 
-      tempDissapearedFaces.forEach((tdf) => {
+      this.tempDissapearedFaces.forEach((tdf) => {
         if (!dissapearedFaces.find((df) => df.id === tdf)) {
           lineChartData = lineChartData.filter((lcd) => lcd.id !== `ID ${tdf}`);
         }
       });
-      tempDissapearedFaces = [];
+      this.tempDissapearedFaces = [];
 
       dissapearedFaces.forEach((df) => {
         const detectedEmo = detectedEmotions.find((de) => de.id === df.id);
@@ -267,7 +250,7 @@ class App extends React.Component {
           }
         } else {
           if (df.counter === 10) {
-            tempDissapearedFaces.push(df.id);
+            this.tempDissapearedFaces.push(df.id);
           } else {
             let chartData = lineChartData.find(
               (lcd) => lcd.id === `ID ${df.id}`
@@ -324,7 +307,6 @@ class App extends React.Component {
         frame: "data:image/jpg;base64," + response.data.frame,
         pieChartData: pieChartData,
         lineChartData: lineChartData,
-        tempDissapearedFaces: tempDissapearedFaces,
         xPoint: xPoint + 1,
       });
     } catch (error) {
@@ -335,27 +317,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#F6F6F6" }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={this.toggleDrawer(true)}
-            >
-              <Menu />
-            </IconButton>
-            <Divider />
-            <Drawer
-              anchor="left"
-              open={this.state.isDrawerOpen}
-              onClose={this.toggleDrawer(false)}
-            >
-              <ListMenu />
-            </Drawer>
-            <Typography variant="h5">Facial Expression Recognition</Typography>
-          </Toolbar>
-        </AppBar>
+        <Header />
         <Container
           maxWidth="xl"
           style={{ marginTop: "20px", marginBottom: "20px" }}
@@ -554,11 +516,7 @@ class App extends React.Component {
             </Container>
           </Paper>
         </Container>
-        <AppBar position="static" style={{ padding: "10px" }}>
-          <Typography style={{ textAlign: "center" }}>
-            Copyright © 2020 Bilgehan Biricik · All rights reserved
-          </Typography>
-        </AppBar>
+        <Footer />
       </div>
     );
   }

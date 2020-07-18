@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Divider,
-  Typography,
   Container,
   Paper,
-  Drawer,
   TableContainer,
   Table,
   TableRow,
@@ -15,15 +9,14 @@ import {
   TableHead,
   TableBody,
 } from "@material-ui/core";
-import ListMenu from "../components/ListMenu";
-import { Menu } from "@material-ui/icons";
 import axios from "axios";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default class ResultsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDrawerOpen: false,
       rows: [],
     };
   }
@@ -42,16 +35,6 @@ export default class ResultsPage extends Component {
       })
       .catch((err) => console.log(err));
   }
-
-  toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    this.setState({ isDrawerOpen: open });
-  };
 
   createData = (
     id,
@@ -76,27 +59,7 @@ export default class ResultsPage extends Component {
   render() {
     return (
       <div style={{ backgroundColor: "#F6F6F6" }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={this.toggleDrawer(true)}
-            >
-              <Menu />
-            </IconButton>
-            <Divider />
-            <Drawer
-              anchor="left"
-              open={this.state.isDrawerOpen}
-              onClose={this.toggleDrawer(false)}
-            >
-              <ListMenu />
-            </Drawer>
-            <Typography variant="h5">Facial Expression Recognition</Typography>
-          </Toolbar>
-        </AppBar>
+        <Header />
         <Container
           maxWidth="xl"
           style={{ marginTop: "20px", marginBottom: "20px" }}
@@ -145,11 +108,7 @@ export default class ResultsPage extends Component {
             </TableContainer>
           </Paper>
         </Container>
-        <AppBar position="static" style={{ padding: "10px" }}>
-          <Typography style={{ textAlign: "center" }}>
-            Copyright © 2020 Bilgehan Biricik · All rights reserved
-          </Typography>
-        </AppBar>
+        <Footer />
       </div>
     );
   }
