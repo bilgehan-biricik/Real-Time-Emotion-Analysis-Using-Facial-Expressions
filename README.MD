@@ -21,7 +21,7 @@ What this web service does is, first it's tries to detect faces(using OpenCV's `
 Developed FER(Facial Expression Recognition) model for emotion recognition is called [MiniXception](https://github.com/oarriaga/face_classification/blob/master/report.pdf) model. This model is trained with [FER-2013](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data) dataset.
 
 The trained model have ~65% accuracy.
-<img src="images/acc.png" width="350"><img src="images/loss.png" width="350">
+<img src="images/acc.png" width="400"><img src="images/loss.png" width="400">
 
 ## Get Started
 
