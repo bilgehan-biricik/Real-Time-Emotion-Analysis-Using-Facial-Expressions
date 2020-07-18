@@ -14,7 +14,7 @@ In this project, developed a client-server application that try to recognize hum
 
 ![](/images/diagram.jpeg)
 
-As seen in the diagram, we build a RESTful web service using Flask framework that tries to recognizte emotions on the server-side and a ReacJS web application that captures frames from video or webcam feed and show results on display as charts and images on the client-side.
+As seen in the diagram, we build a RESTful web service using Flask framework that tries to recognizte emotions on the server-side and a ReactJS web application that captures frames from video or webcam feed and show results on display as charts and images on the client-side.
 
 What this web service does is, first it's tries to detect faces(using OpenCV's `dnn` module) from captured frames(encoded with Base64) that coming from web app, and then a simple object tracking algorithm label these faces and add them to a dictionary. After that our trained FER model tries to recognize emotions from the labeled faces and send results to the web app.
 
