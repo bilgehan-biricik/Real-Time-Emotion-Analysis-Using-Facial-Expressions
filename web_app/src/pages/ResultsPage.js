@@ -28,7 +28,7 @@ export default class ResultsPage extends Component {
       .then((response) => {
         response.data.results.forEach((el) => {
           rows.push(
-            this.createData(el[0], el[1], el[2], el[3], el[4], el[5], el[6])
+            this.createData(el[0], el[1], el[2], el[3], el[4], el[5])
           );
         });
         this.setState({ rows: rows });
@@ -41,7 +41,6 @@ export default class ResultsPage extends Component {
     sessionStartTime,
     duration,
     maxDetectedFace,
-    avgSatisfaction,
     mostDetectedEmotion,
     mostDetectedEmotionCounter
   ) => {
@@ -50,7 +49,6 @@ export default class ResultsPage extends Component {
       sessionStartTime,
       duration,
       maxDetectedFace,
-      avgSatisfaction,
       mostDetectedEmotion,
       mostDetectedEmotionCounter,
     };

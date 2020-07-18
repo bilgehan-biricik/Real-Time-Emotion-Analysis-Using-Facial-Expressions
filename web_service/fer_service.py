@@ -74,7 +74,7 @@ def save_session_data():
 def get_session_results():
     conn = sqlite3.connect("database/fer_db.db")
     cursor = conn.execute("SELECT * FROM SESSION_RESULTS")
-    table = [[row[0],  row[1], row[2], row[3], row[4], row[5], row[6]] for row in cursor]
+    table = [[row[0],  row[1], row[2], row[3], row[4], row[5]] for row in cursor]
     conn.close()
     return jsonify({"results": table})
     

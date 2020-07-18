@@ -129,7 +129,6 @@ class App extends React.Component {
       sessionStartTimestamp: new Date().toLocaleString(),
       duration: 0,
       maxDetectedFace: 0,
-      avgSatisfactionScore: 0,
       mostDetecedEmotion: null,
     };
     this.mostDetectedEmotionCounter = [
