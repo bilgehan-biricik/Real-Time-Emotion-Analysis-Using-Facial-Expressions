@@ -59,6 +59,10 @@ If you want to train the model, first you have to download FER-2013 dataset to `
 $ python train_fer2013.py
 ```
 
+### Install NPM Dependencies
+
+To run web app you have to install the web depencies. For this go `web_app` folder and run `npm install` command.
+
 ### Run Web Service and Web Application Using VSCode
 
 If you are using VSCode you can simply run web service and web application. Open project with VSCode and go to "Terminal > Run Task..." and select "Start Gunicorn". After that again go "Terminal > Run Task..." and select "npm: start: web_app/"
